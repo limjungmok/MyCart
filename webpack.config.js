@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
 
@@ -8,7 +9,10 @@ module.exports = {
     핫 모듈을 따로 entry 에 넣어주어야 합니다.
     */
 
-    entry: './src/index.js',
+    entry: [
+        './src/index.js',
+        './src/style/style.css'
+    ],
 
     output: {
         path: __dirname + '/public',
@@ -24,7 +28,16 @@ module.exports = {
                     presets: ['es2015', 'react']
                 })],
                 exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!css-loader'
             }
         ]
+    },
+
+    resolve: {
+        root: path.resolve('./src')
     }
+
 };
